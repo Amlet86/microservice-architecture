@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-home-work
+  annotations:
+    # путь на который будет rewrite
+    nginx.ingress.kubernetes.io/rewrite-target: /health
+spec:
+  ingressClassName: nginx
+  rules:
+    - host:
+      http:
+        paths:
+          # путь с которого будет rewrite
+          - path: /otusapp/amlet
+            pathType: Prefix
+            backend:
+              service:
+                name: service-home-work
+                port:
+                  number: 80

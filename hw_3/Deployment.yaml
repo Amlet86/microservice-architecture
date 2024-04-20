@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-home-work
+  labels:
+    app: home-work
+spec:
+  replicas: 3
+  # минимальное время готовности pod (задержка)
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # максимальное превышение желаемого кол-ва pod
+      maxSurge: 1
+      # максимальное кол-во недоступных pod
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: home-work
+  template:
+    metadata:
+      labels:
+        app: home-work
+    spec:
+      containers:
+        - name: home-work
+          image: amlet/spring-boot-app:healthcheck
+          ports:
+            - containerPort: 8000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 3
