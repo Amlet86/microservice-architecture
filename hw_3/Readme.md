@@ -4,7 +4,7 @@
 
 Все манифесты можно применить одной командой 
     
-    kubectl apply -f
+    kubectl apply -f .
 
 После применения манифестов GET запрос на http://arch.homework/health отдает {“status”: “OK”}.
 

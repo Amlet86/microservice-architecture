@@ -19,3 +19,10 @@ spec:
                 name: service-home-work
                 port:
                   number: 80
+          - path: /health
+            pathType: Prefix
+            backend:
+              service:
+                name: service-home-work
+                port:
+                  number: 80
